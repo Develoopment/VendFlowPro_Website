@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>VendFlow Pro | Free smart vending for your business</title>
+  <meta name="description" content="VendFlow Pro places cashless, AI camera smart coolers in offices, gyms, warehouses and more. Delivered, stocked and serviced at no cost to the host." />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..125,400..900&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind (Play CDN). For production, compile Tailwind instead; see README. -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            flame:    { DEFAULT: '#F26A1B', dark: '#C9520D', soft: '#FFE9DC' },
+            graphite: { DEFAULT: '#2B3035', 700: '#3D434A', 500: '#6A7179', 300: '#B8BDC3', 100: '#EDEFF1', 50: '#F6F7F8' }
+          },
+          fontFamily: {
+            sans: ['Archivo', 'system-ui', '-apple-system', 'Segoe UI', 'Roboto', 'sans-serif']
+          },
+          maxWidth: { prose: '62ch' }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body class="bg-white text-graphite font-sans antialiased">
+
+  <a href="#main" class="skip-link">Skip to content</a>
+
+  <!-- ============ HEADER ============ -->
+  <header id="site-header" class="sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-graphite-100">
+    <nav class="mx-auto max-w-6xl px-5 sm:px-8 h-16 flex items-center justify-between" aria-label="Main">
+      <a href="#top" class="flex items-center gap-2 font-extrabold text-lg tracking-tight" aria-label="VendFlow Pro home">
+        <span class="logo-mark" aria-hidden="true"></span>
+        <span>VendFlow<span class="text-flame">Pro</span></span>
+      </a>
+
+      <ul class="hidden md:flex items-center gap-7 text-[15px] font-medium text-graphite-700">
+        <li><a class="nav-link" href="#top">Overview</a></li>
+        <li><a class="nav-link" href="#features">Features</a></li>
+        <li><a class="nav-link" href="#faq">FAQ</a></li>
+        <li class="hidden lg:block"><a class="font-semibold text-graphite hover:text-flame-dark" href="tel:+15555550100">(555) 555-0100</a></li>
+        <li><a class="btn-primary !py-2.5 !px-5" href="#contact">Request a machine</a></li>
+      </ul>
+
+      <button id="menu-toggle" class="md:hidden p-2 -mr-2 rounded-md" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open menu">
+        <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <path class="icon-open" d="M4 7h16M4 12h16M4 17h16" />
+          <path class="icon-close hidden" d="M6 6l12 12M18 6L6 18" />
+        </svg>
+      </button>
+    </nav>
+
+    <div id="mobile-menu" class="md:hidden hidden border-t border-graphite-100 bg-white">
+      <ul class="px-5 py-4 flex flex-col gap-1 text-lg font-medium">
+        <li><a class="block py-3" href="#top">Overview</a></li>
+        <li><a class="block py-3" href="#features">Features</a></li>
+        <li><a class="block py-3" href="#faq">FAQ</a></li>
+        <li><a class="block py-3" href="tel:+15555550100">Call or text (555) 555-0100</a></li>
+        <li class="pt-2"><a class="btn-primary w-full justify-center" href="#contact">Request a machine</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- ============ 1. HERO ============ -->
+    <section id="top" class="relative overflow-hidden">
+      <div class="hero-grid" aria-hidden="true"></div>
+      <div class="relative mx-auto max-w-6xl px-5 sm:px-8 pt-12 pb-16 md:pt-20 md:pb-24 grid md:grid-cols-[1.1fr_0.9fr] gap-12 md:gap-8 items-center">
+
+        <div>
+          <p class="text-graphite-500 font-medium">Locally owned and operated</p>
+          <h1 class="hero-title mt-3 font-black text-graphite leading-[0.95] tracking-tight">
+            A smart market for your space. Free to host, zero upkeep.
+          </h1>
+          <p class="mt-6 text-lg sm:text-xl text-graphite-700 leading-relaxed max-w-prose">
+            VendFlow Pro puts a cashless, glass-front smart cooler in your building. Four AI cameras recognize exactly what each customer takes, so we can stock fresh meals, cold drinks and snacks side by side. We deliver it, keep it full and fix anything that goes wrong, all at no cost to you.
+          </p>
+          <div class="mt-8 flex flex-col sm:flex-row gap-3">
+            <a href="#contact" class="btn-primary justify-center">Get my free machine</a>
+            <a href="#features" class="btn-secondary justify-center">See how it works</a>
+          </div>
+          <dl class="mt-10 grid grid-cols-3 gap-4 max-w-md border-t border-graphite-100 pt-6">
+            <div><dt class="text-sm text-graphite-500">Cost to you</dt><dd class="text-xl sm:text-2xl font-extrabold whitespace-nowrap">$0</dd></div>
+            <div><dt class="text-sm text-graphite-500">Install</dt><dd class="text-xl sm:text-2xl font-extrabold whitespace-nowrap">7–10 days</dd></div>
+            <div><dt class="text-sm text-graphite-500">Bottles held</dt><dd class="text-xl sm:text-2xl font-extrabold whitespace-nowrap">336</dd></div>
+          </dl>
+          <p class="mt-4 text-sm text-graphite-500">No contracts to buy anything. No fees.</p>
+        </div>
+
+        <!-- Machine photo: save your own photo as images/machine.jpg.
+             Until that file exists, the drawn illustration below is shown instead. -->
+        <figure class="machine-wrap mx-auto w-full max-w-[340px]">
+          <img id="machine-photo"
+               src="images/machine.jpg"
+               alt="A VendFlow Pro smart vending cooler, lit and stocked behind a glass door"
+               class="w-full h-auto rounded-2xl"
+               onerror="this.remove(); document.getElementById('machine-svg').classList.remove('hidden');" />
+          <svg viewBox="0 0 320 560" id="machine-svg" class="w-full h-auto hidden" role="img" aria-labelledby="machine-title">
+            <title id="machine-title">VendFlow Pro smart vending cooler with a glass door showing drinks, fresh food and snacks, with cameras on the door frame</title>
+            <defs>
+              <linearGradient id="glass" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#FFFFFF" stop-opacity="0.9"/>
+                <stop offset="1" stop-color="#EDEFF1" stop-opacity="0.95"/>
+              </linearGradient>
+              <clipPath id="glassClip"><rect x="34" y="92" width="190" height="400" rx="6"/></clipPath>
+            </defs>
+
+            <!-- floor shadow -->
+            <ellipse cx="160" cy="548" rx="140" ry="9" fill="#2B3035" opacity="0.12"/>
+
+            <!-- body -->
+            <rect x="16" y="20" width="288" height="522" rx="14" fill="#2B3035"/>
+            <rect x="16" y="20" width="288" height="58" rx="14" fill="#F26A1B"/>
+            <rect x="16" y="60" width="288" height="18" fill="#F26A1B"/>
+            <text x="36" y="56" font-family="Archivo, sans-serif" font-weight="800" font-size="22" fill="#FFFFFF">VendFlow<tspan fill="#2B3035">Pro</tspan></text>
+
+            <!-- camera -->
+            <circle cx="272" cy="49" r="15" fill="#2B3035"/>
+            <circle cx="272" cy="49" r="8" fill="#3D434A"/>
+            <circle cx="272" cy="49" r="4" fill="#F26A1B" class="cam-dot"/>
+
+            <!-- glass door -->
+            <rect x="34" y="92" width="190" height="400" rx="6" fill="url(#glass)"/>
+
+            <g clip-path="url(#glassClip)">
+              <!-- shelves -->
+              <g fill="#B8BDC3">
+                <rect x="34" y="176" width="190" height="4"/>
+                <rect x="34" y="266" width="190" height="4"/>
+                <rect x="34" y="356" width="190" height="4"/>
+                <rect x="34" y="446" width="190" height="4"/>
+              </g>
+
+              <!-- row 1: bottles -->
+              <g>
+                <rect x="48" y="118" width="20" height="58" rx="5" fill="#F26A1B"/><rect x="53" y="110" width="10" height="10" rx="2" fill="#3D434A"/>
+                <rect x="76" y="118" width="20" height="58" rx="5" fill="#6A7179"/><rect x="81" y="110" width="10" height="10" rx="2" fill="#3D434A"/>
+                <rect x="104" y="126" width="18" height="50" rx="5" fill="#FFB98A"/><rect x="108" y="118" width="10" height="10" rx="2" fill="#3D434A"/>
+                <rect x="130" y="118" width="20" height="58" rx="5" fill="#F26A1B"/><rect x="135" y="110" width="10" height="10" rx="2" fill="#3D434A"/>
+                <rect x="158" y="132" width="26" height="44" rx="4" fill="#3D434A"/>
+                <rect x="192" y="132" width="24" height="44" rx="4" fill="#B8BDC3"/>
+              </g>
+              <!-- row 2: meals / salads -->
+              <g>
+                <rect x="46" y="226" width="54" height="40" rx="6" fill="#FFFFFF" stroke="#B8BDC3" stroke-width="2"/>
+                <circle cx="62" cy="244" r="7" fill="#7FB069"/><circle cx="78" cy="248" r="6" fill="#F26A1B"/><circle cx="88" cy="240" r="5" fill="#7FB069"/>
+                <rect x="108" y="226" width="54" height="40" rx="6" fill="#FFFFFF" stroke="#B8BDC3" stroke-width="2"/>
+                <rect x="116" y="238" width="38" height="16" rx="8" fill="#E7B36A"/>
+                <rect x="170" y="210" width="46" height="56" rx="6" fill="#FFE9DC" stroke="#F26A1B" stroke-width="2"/>
+                <path d="M178 230h30M178 240h22" stroke="#F26A1B" stroke-width="3" stroke-linecap="round"/>
+              </g>
+              <!-- row 3: snacks, mixed sizes -->
+              <g>
+                <path d="M46 356 l4 -52 h30 l4 52 z" fill="#F26A1B"/>
+                <path d="M90 356 l3 -40 h24 l3 40 z" fill="#6A7179"/>
+                <rect x="128" y="318" width="36" height="38" rx="4" fill="#3D434A"/>
+                <rect x="170" y="300" width="46" height="56" rx="4" fill="#FFB98A"/>
+                <rect x="176" y="312" width="34" height="8" rx="2" fill="#FFFFFF" opacity=".7"/>
+              </g>
+              <!-- row 4: fruit, yogurt, cans -->
+              <g>
+                <circle cx="62" cy="432" r="14" fill="#E5533D"/><circle cx="92" cy="434" r="12" fill="#F2C14E"/>
+                <rect x="112" y="414" width="26" height="32" rx="4" fill="#FFFFFF" stroke="#B8BDC3" stroke-width="2"/>
+                <rect x="112" y="414" width="26" height="8" rx="3" fill="#F26A1B"/>
+                <rect x="146" y="408" width="18" height="38" rx="4" fill="#6A7179"/>
+                <rect x="170" y="408" width="18" height="38" rx="4" fill="#F26A1B"/>
+                <rect x="194" y="408" width="18" height="38" rx="4" fill="#3D434A"/>
+              </g>
+
+              <!-- vision scan line -->
+              <g class="scan-line">
+                <rect x="34" y="92" width="190" height="2" fill="#F26A1B"/>
+                <rect x="34" y="94" width="190" height="26" fill="#F26A1B" opacity="0.10"/>
+              </g>
+
+              <!-- glass reflection -->
+              <path d="M34 92 L96 92 L34 210 Z" fill="#FFFFFF" opacity="0.45"/>
+            </g>
+
+            <!-- door handle -->
+            <rect x="214" y="250" width="6" height="84" rx="3" fill="#6A7179"/>
+
+            <!-- side control panel -->
+            <rect x="238" y="104" width="52" height="72" rx="6" fill="#3D434A"/>
+            <rect x="244" y="110" width="40" height="44" rx="3" fill="#F6F7F8"/>
+            <path d="M252 124h24M252 132h16M252 140h20" stroke="#F26A1B" stroke-width="3" stroke-linecap="round"/>
+            <rect x="244" y="160" width="40" height="8" rx="2" fill="#6A7179"/>
+
+            <!-- tap to pay -->
+            <rect x="238" y="196" width="52" height="60" rx="6" fill="#3D434A"/>
+            <path d="M256 214a12 12 0 0 1 0 22M262 208a20 20 0 0 1 0 34M250 220a5 5 0 0 1 0 10" fill="none" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round"/>
+
+            <!-- base vent -->
+            <rect x="34" y="504" width="256" height="24" rx="4" fill="#3D434A"/>
+            <path d="M50 512h224M50 520h224" stroke="#2B3035" stroke-width="3"/>
+          </svg>
+          <figcaption class="mt-4 text-center text-sm text-graphite-500">
+            Tap to unlock, grab what you want, shut the door. The cameras bill only what was taken.
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- ============ 2. FEATURES ============ -->
+    <section id="features" class="bg-graphite-50 border-y border-graphite-100 scroll-mt-16">
+      <div class="mx-auto max-w-6xl px-5 sm:px-8 py-20 md:py-28">
+        <div class="max-w-2xl">
+          <h2 class="section-title font-extrabold tracking-tight">Your best amenity, with no bill attached</h2>
+          <p class="mt-4 text-lg text-graphite-700 leading-relaxed">
+            The machine, the products and the upkeep are all on us. Your part is a spot against a wall and a regular outlet.
+          </p>
+        </div>
+
+        <div class="mt-12 grid gap-6 lg:grid-cols-3">
+
+          <!-- Card 1 -->
+          <article class="feature-card">
+            <div class="feature-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>
+            </div>
+            <h3 class="text-2xl font-extrabold tracking-tight">Four AI cameras on every shelf</h3>
+            <p class="mt-3 text-graphite-700 leading-relaxed">
+              Cameras mounted high and low on opposite corners watch every shelf from several angles, so nothing hides behind a tall bottle. With no spirals or assigned slots, products never fall or get stuck.
+            </p>
+            <div class="benefit-split">
+              <div>
+                <h4 class="benefit-label">For your visitors</h4>
+                <p>Real food like salads, sandwiches and ice cream, plus glass-bottle drinks. If they put something back, they aren't billed for it.</p>
+              </div>
+              <div>
+                <h4 class="benefit-label">For your location</h4>
+                <p>A lit, modern cabinet that looks at home in a lobby, with a video screen up top that can show your building's announcements.</p>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card 2 -->
+          <article class="feature-card">
+            <div class="feature-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20M6 15h4"/></svg>
+            </div>
+            <h3 class="text-2xl font-extrabold tracking-tight">Cashless tap-to-pay checkout</h3>
+            <p class="mt-3 text-graphite-700 leading-relaxed">
+              Customers pay with a credit or debit card, Apple Pay, Google Pay or Samsung Pay, by tap, chip or swipe. One charge goes through after the door shuts.
+            </p>
+            <div class="benefit-split">
+              <div>
+                <h4 class="benefit-label">For your visitors</h4>
+                <p>No hunting for exact change or feeding in wrinkled bills. They get a digital receipt and can report a wrong charge on the spot.</p>
+              </div>
+              <div>
+                <h4 class="benefit-label">For your location</h4>
+                <p>No cash on your premises, and any refund requests come straight to us, so your staff never has to deal with them.</p>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card 3 -->
+          <article class="feature-card">
+            <div class="feature-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 5-6"/></svg>
+            </div>
+            <h3 class="text-2xl font-extrabold tracking-tight">Free, fully serviced, stocked by live data</h3>
+            <p class="mt-3 text-graphite-700 leading-relaxed">
+              Every sale updates our inventory in real time, so we restock based on what's actually selling instead of a fixed schedule. The machine alerts us to faults or temperature problems on its own.
+            </p>
+            <div class="benefit-split">
+              <div>
+                <h4 class="benefit-label">For your visitors</h4>
+                <p>Their favorites stay in stock, and the selection shifts over time toward what people in your building buy.</p>
+              </div>
+              <div>
+                <h4 class="benefit-label">For your location</h4>
+                <p>Nothing to buy, lease or pay monthly, and no repair bills. Questions go to a real local person, not a call center.</p>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 3. FAQ ============ -->
+    <section id="faq" class="scroll-mt-16">
+      <div class="mx-auto max-w-6xl px-5 sm:px-8 py-20 md:py-28 grid lg:grid-cols-[0.8fr_1.2fr] gap-10 lg:gap-16">
+        <div>
+          <h2 class="section-title font-extrabold tracking-tight">Common questions from hosts</h2>
+          <p class="mt-4 text-lg text-graphite-700 leading-relaxed max-w-md">
+            What property managers usually want to know before saying yes. Something else on your mind? Call or text <a href="tel:+15555550100" class="text-flame-dark font-semibold underline underline-offset-4 decoration-2 hover:text-flame">(555) 555-0100</a>.
+          </p>
+        </div>
+
+        <div class="faq-list divide-y divide-graphite-100 border-y border-graphite-100">
+          <details class="faq-item">
+            <summary>What will this cost me?</summary>
+            <div class="faq-body"><p>Nothing to buy, lease or pay monthly, and no service bills. We own the machine and make our money on product sales. Your only cost is the electricity it uses, typically a few dollars a month.</p></div>
+          </details>
+
+          <details class="faq-item">
+            <summary>How much room and power does it need?</summary>
+            <div class="faq-body"><p>The cabinet measures 28.6″ W × 31.2″ D × 80.6″ H. Leave about 31″ of wall width for clearance; it fits through a standard 34″ door. Two machines side by side need roughly 57″, three need about 86″.</p><p class="mt-3">It runs on a regular grounded 120V outlet with no special wiring or plumbing, and connects over Wi-Fi or its own cellular connection.</p></div>
+          </details>
+
+          <details class="faq-item">
+            <summary>What temperatures can it run at, and how much fits?</summary>
+            <div class="faq-body"><p>As a refrigerator it stays between 33 and 44 °F, with temperature monitored around the clock. The same cabinet can instead run as a freezer (−10 to 0 °F) or as dry shelving for snacks. It holds up to 336 twenty-ounce bottles.</p></div>
+          </details>
+
+          <details class="faq-item">
+            <summary>Does every product need its own slot?</summary>
+            <div class="faq-body"><p>No. The cameras read the whole shelf rather than fixed lanes, so products can be arranged any way that suits your building and rearranged whenever tastes change.</p></div>
+          </details>
+
+          <details class="faq-item">
+            <summary>Which payment methods work?</summary>
+            <div class="faq-body"><p>It's fully cashless: tap-to-pay, Apple Pay, Google Wallet, and chip or swipe cards, with digital receipts. The specific card brands accepted depend on the payment reader installed; some readers don't take Amex, Discover or prepaid cards, and we'll tell you which applies to your machine.</p></div>
+          </details>
+
+          <details class="faq-item">
+            <summary>What if a customer is charged incorrectly?</summary>
+            <div class="faq-body"><p>They can report it at the end of their purchase. We review the transaction, charge the correct amount and send an updated receipt. Your staff never has to get involved.</p></div>
+          </details>
+
+          <details class="faq-item">
+            <summary>How often is it restocked?</summary>
+            <div class="faq-body"><p>Usually every one to two weeks, adjusted to how fast your machine sells. Problems and temperature issues reach us automatically, and we respond to service calls the same day.</p></div>
+          </details>
+
+          <details class="faq-item">
+            <summary>How quickly can it be installed?</summary>
+            <div class="faq-body"><p>Typically within 7–10 days of approval. Once it's plugged in at its final spot, setup and system checks take another 24–48 hours before it starts selling.</p></div>
+          </details>
+
+          <details class="faq-item">
+            <summary>Is there a long-term contract?</summary>
+            <div class="faq-body"><p>No. You sign a short placement agreement that covers access and liability, and that's it; it's not a lease or a purchase. High-traffic locations may qualify for a commission, and we'll be upfront about whether yours does.</p></div>
+          </details>
+
+          <details class="faq-item">
+            <summary>Is my location a good fit?</summary>
+            <div class="faq-body"><p>Usually, if around 25 or more people pass through each day. Offices, warehouses, gyms, schools, apartment buildings and clinics all work well. Send us your address and we'll confirm that it's in our service area.</p></div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 4. CONTACT ============ -->
+    <section id="contact" class="bg-graphite text-white scroll-mt-16">
+      <div class="mx-auto max-w-6xl px-5 sm:px-8 py-20 md:py-28 grid lg:grid-cols-[0.85fr_1.15fr] gap-12 lg:gap-16">
+        <div>
+          <h2 class="section-title font-extrabold tracking-tight">Request a machine for your location</h2>
+          <p class="mt-4 text-lg text-graphite-300 leading-relaxed max-w-md">
+            Share a few details about your building. We'll check whether it's a fit, suggest the right setup and book a free site visit.
+          </p>
+          <ul class="mt-8 space-y-4 text-graphite-100">
+            <li class="flex gap-3"><span class="check" aria-hidden="true"></span>Free, with no obligation</li>
+            <li class="flex gap-3"><span class="check" aria-hidden="true"></span>Site visit in days, installed in 7–10</li>
+            <li class="flex gap-3"><span class="check" aria-hidden="true"></span>We only use your details to follow up on this request</li>
+          </ul>
+          <div class="mt-10 space-y-3 border-t border-graphite-700 pt-8">
+            <p><a href="tel:+15555550100" class="text-xl font-bold hover:text-flame">(555) 555-0100</a><br><span class="text-sm text-graphite-300">Call or text, Mon–Sat</span></p>
+            <p><a href="mailto:hello@vendflowpro.com" class="font-semibold break-all hover:text-flame">hello@vendflowpro.com</a><br><span class="text-sm text-graphite-300">Replies within 24 business hours</span></p>
+          </div>
+        </div>
+
+        <form id="contact-form" class="contact-form bg-white text-graphite rounded-2xl p-6 sm:p-8" novalidate>
+          <div class="grid sm:grid-cols-2 gap-5">
+            <div class="field">
+              <label for="name">Full name</label>
+              <input id="name" name="name" type="text" autocomplete="name" required />
+              <p class="error-msg" data-for="name">Enter your full name.</p>
+            </div>
+            <div class="field">
+              <label for="business">Business name</label>
+              <input id="business" name="business" type="text" autocomplete="organization" required />
+              <p class="error-msg" data-for="business">Enter your business name.</p>
+            </div>
+            <div class="field">
+              <label for="email">Email address</label>
+              <input id="email" name="email" type="email" autocomplete="email" required />
+              <p class="error-msg" data-for="email">Enter a valid email, like name@company.com.</p>
+            </div>
+            <div class="field">
+              <label for="phone">Phone number</label>
+              <input id="phone" name="phone" type="tel" autocomplete="tel" required />
+              <p class="error-msg" data-for="phone">Enter a phone number so we can reach you.</p>
+            </div>
+            <div class="field">
+              <label for="location_type">Facility type</label>
+              <select id="location_type" name="location_type" required>
+                <option value="">Select one</option>
+                <option>Office / Tech Hub</option>
+                <option>Warehouse / Logistics</option>
+                <option>Gym / Fitness Center</option>
+                <option>School / Campus</option>
+                <option>Multi-Family Residential</option>
+                <option>Medical / Clinic</option>
+                <option>Manufacturing / Industrial</option>
+                <option>Hotel / Hospitality</option>
+                <option>Auto Dealership / Service</option>
+                <option>Other</option>
+              </select>
+              <p class="error-msg" data-for="location_type">Select your facility type.</p>
+            </div>
+            <div class="field">
+              <label for="traffic">Estimated daily foot traffic</label>
+              <select id="traffic" name="traffic" required>
+                <option value="">Select one</option>
+                <option>Under 25 people / day</option>
+                <option>25–50</option>
+                <option>50–100</option>
+                <option>100–250</option>
+                <option>250–500</option>
+                <option>500+ people / day</option>
+              </select>
+              <p class="error-msg" data-for="traffic">Select an estimate; a rough guess is fine.</p>
+            </div>
+            <div class="field sm:col-span-2">
+              <label for="message">Anything else? <span class="optional">(optional)</span></label>
+              <textarea id="message" name="message" rows="4"></textarea>
+            </div>
+          </div>
+
+          <!-- Honeypot spam trap: leave hidden -->
+          <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" class="hidden" aria-hidden="true" />
+
+          <button type="submit" class="btn-primary w-full justify-center mt-6">
+            <span class="btn-label">Request my free machine</span>
+          </button>
+          <p id="form-status" class="form-status" role="status" aria-live="polite"></p>
+          <p class="text-center text-sm text-graphite-500">We typically reply within 24 business hours.</p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="bg-graphite text-graphite-300 border-t border-graphite-700">
+    <div class="mx-auto max-w-6xl px-5 sm:px-8 py-8 flex flex-col sm:flex-row gap-4 justify-between text-sm">
+      <p><span class="font-bold text-white">VendFlow<span class="text-flame">Pro</span></span> &nbsp;Smart vending, fully managed.</p>
+      <p>&copy; <span id="year"></span> VendFlow Pro. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
