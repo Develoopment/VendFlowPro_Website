@@ -13,7 +13,7 @@ Until `FORM_ENDPOINT` is set, submitting opens the visitor's email app with the 
 Save a photo of your machine as `images/machine.jpg`. Until that file exists, a drawn illustration is shown instead.
 
 ## Your contact details
-The phone number (555) 555-0100 is a placeholder. Search `index.html` and `script.js` for `555` and replace it (including the `tel:+15555550100` links). The email is set to hello@vendflowpro.com in `index.html` and in `FALLBACK_EMAIL` in `script.js`.
+The phone number is (469) 465 5915. To change it, search `index.html` and `script.js` for `465 5915` and `tel:+14694655915`. The email is set to hello@vendflowpro.com in `index.html` and in `FALLBACK_EMAIL` in `script.js`.
 
 ## Tailwind for production
 The page uses the Tailwind Play CDN, which is fine for demos but prints a console warning. For production, install Tailwind, copy the `tailwind.config` block from `index.html` into `tailwind.config.js`, build a CSS file, and replace the CDN `<script>` tags with a `<link>` to it.

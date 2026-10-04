@@ -144,7 +144,7 @@ document.addEventListener("DOMContentLoaded", () => {
       setStatus("Request received. We'll reach out within 24 business hours to schedule your free site assessment.", "success");
     } catch (err) {
       console.error(err);
-      setStatus(`That didn't send. Try again, or reach us at (555) 555-0100 or ${FALLBACK_EMAIL}.`, "error");
+      setStatus(`That didn't send. Try again, or reach us at (469) 465 5915 or ${FALLBACK_EMAIL}.`, "error");
     } finally {
       button.disabled = false;
       label.textContent = "Request my free machine";
