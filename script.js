@@ -1,18 +1,21 @@
 /* ==========================================================
    VendFlow Pro - site scripts
    ----------------------------------------------------------
-   CONTACT FORM SETUP
-   1. Create a free form at https://formspree.io (or Getform,
-      Basin, etc. - any service that accepts a JSON POST).
-   2. Paste the endpoint URL below, e.g.
-      "https://formspree.io/f/abcdwxyz"
-   3. Submissions will arrive in your inbox.
+   CONTACT FORM -> EMAIL
+   Submissions are emailed to SUPPORT_EMAIL through FormSubmit
+   (https://formsubmit.co), which needs no account or API key.
 
-   Until an endpoint is set, the form falls back to opening the
-   visitor's email app with a pre-filled message to FALLBACK_EMAIL.
+   One-time activation: the first submission from the live site
+   sends an "Activate form" email to SUPPORT_EMAIL. Click the
+   link in it once; every submission after that is delivered.
+
+   Optional: FormSubmit's activation email also gives you a
+   random alias (e.g. "a1b2c3d4e5..."). Put it in FORM_ALIAS to
+   keep the real address out of the page source.
    ========================================================== */
-const FORM_ENDPOINT  = "";                       // <- your form endpoint
-const FALLBACK_EMAIL = "hello@vendflowpro.com";  // <- your email address
+const SUPPORT_EMAIL = "support@vendflowpro.com";
+const FORM_ALIAS    = "";  // <- optional FormSubmit alias
+const FORM_ENDPOINT = `https://formsubmit.co/ajax/${FORM_ALIAS || SUPPORT_EMAIL}`;
 
 document.addEventListener("DOMContentLoaded", () => {
   /* ---------- Footer year ---------- */
@@ -110,25 +113,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const data = Object.fromEntries(new FormData(form).entries());
     if (data._gotcha) return; // bot filled the honeypot
 
-    // No endpoint configured yet: open the visitor's email app instead
-    if (!FORM_ENDPOINT) {
-      const body = [
-        `Name: ${data.name}`,
-        `Business: ${data.business}`,
-        `Email: ${data.email}`,
-        `Phone: ${data.phone}`,
-        `Facility type: ${data.location_type}`,
-        `Daily foot traffic: ${data.traffic}`,
-        "",
-        data.message || "",
-      ].join("\n");
-      window.location.href =
-        `mailto:${FALLBACK_EMAIL}?subject=${encodeURIComponent("Machine request: " + data.business)}` +
-        `&body=${encodeURIComponent(body)}`;
-      setStatus("Your email app should open with your request filled in.", "success");
-      return;
-    }
-
     button.disabled = true;
     label.textContent = "Sending…";
 
@@ -136,15 +120,31 @@ document.addEventListener("DOMContentLoaded", () => {
       const res = await fetch(FORM_ENDPOINT, {
         method: "POST",
         headers: { "Content-Type": "application/json", Accept: "application/json" },
-        body: JSON.stringify({ ...data, _subject: `Machine request: ${data.business}` }),
+        body: JSON.stringify({
+          Name: data.name,
+          Business: data.business,
+          Email: data.email,
+          Phone: data.phone,
+          "Facility type": data.location_type,
+          "Daily foot traffic": data.traffic,
+          Message: data.message || "(none)",
+          _replyto: data.email,                       // "Reply" goes to the visitor
+          _subject: `Machine request: ${data.business}`,
+          _template: "table",
+          _captcha: "false",
+        }),
       });
-      if (!res.ok) throw new Error("Request failed with status " + res.status);
+      const result = await res.json().catch(() => ({}));
+      // FormSubmit returns success as the string "true" or "false"
+      if (!res.ok || String(result.success) !== "true") {
+        throw new Error(result.message || "Request failed with status " + res.status);
+      }
 
       form.reset();
       setStatus("Request received. We'll reach out within 24 business hours to schedule your free site assessment.", "success");
     } catch (err) {
-      console.error(err);
-      setStatus(`That didn't send. Try again, or reach us at (469) 465 5915 or ${FALLBACK_EMAIL}.`, "error");
+      console.error("Contact form:", err);
+      setStatus(`That didn't send. Try again, or reach us at (469) 465 5915 or ${SUPPORT_EMAIL}.`, "error");
     } finally {
       button.disabled = false;
       label.textContent = "Request my free machine";
