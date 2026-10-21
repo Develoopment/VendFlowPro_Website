@@ -9,6 +9,8 @@ Form submissions are emailed to support@vendflowpro.com through FormSubmit (no a
 2. FormSubmit sends an "Activate form" email to support@vendflowpro.com. Click the link once.
 3. Submit another test and confirm it arrives. The visitor's address is set as reply-to, so you can answer with Reply.
 
+When a visitor submits, the page shows "Request received" immediately and the email is sent in the background. If the send later fails, the message switches to an error and the visitor's details are put back in the form. The send also completes if they close the tab straight away, and an identical request is never sent twice.
+
 To send to a different address, change `SUPPORT_EMAIL` in `script.js`. To hide the address from the page source, paste the alias from FormSubmit's activation email into `FORM_ALIAS`.
 
 ## Logo and colors
@@ -17,7 +19,7 @@ The header logo is `images/logo.png`; the browser-tab icon is `images/favicon.pn
 The palette is sampled from the logo: navy `#13213C` (text, dark sections), violet `#7B5CFF` (accents) with a slightly deeper `#6A48F5` for buttons so white text stays readable, and coral `#FF5A4E` for the illustration. Colors are defined in two places that must match: the `tailwind.config` block in `index.html` and the `:root` variables at the top of `styles.css`.
 
 ## Updating files
-`index.html` loads `styles.css?v=6`, `script.js?v=6` and the images with a version number. When you change any of those files, raise the number (to `?v=7`, and so on) so visitors' browsers fetch the new copy instead of a cached one.
+`index.html` loads `styles.css?v=7`, `script.js?v=7` and the images with a version number. When you change any of those files, raise the number (to `?v=8`, and so on) so visitors' browsers fetch the new copy instead of a cached one.
 
 ## Machine photo
 The hero photo is `images/machine.jpg`. The violet glow, floor shadow and moving camera-scan line around it are drawn with CSS ("Hero machine" in `styles.css`). If you replace the photo with a different shot, adjust the `.machine-glass` percentages so the scan line stays inside the glass door, and update the `width`/`height` on the `<img>` tag.

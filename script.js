@@ -91,8 +91,6 @@ document.addEventListener("DOMContentLoaded", () => {
   /* ---------- Contact form ---------- */
   const form = document.getElementById("contact-form");
   const status = document.getElementById("form-status");
-  const button = form.querySelector('button[type="submit"]');
-  const label = button.querySelector(".btn-label");
   const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
   const validateField = (field) => {
@@ -119,7 +117,44 @@ document.addEventListener("DOMContentLoaded", () => {
     status.className = "form-status" + (type ? " is-" + type : "");
   };
 
-  form.addEventListener("submit", async (e) => {
+  /* Optimistic sending
+     The visitor sees "Request received" right away and the button resets,
+     while the email is sent in the background. Three safeguards:
+     1. keepalive: the request finishes even if the visitor closes the tab.
+     2. Recovery: if the send fails, an error replaces the success message
+        and the visitor's details are put back in the form.
+     3. No duplicates: an identical request is never sent twice while one
+        is in flight or shortly after it succeeded. */
+  const SUCCESS_MSG = "Request received. We'll reach out within 24 business hours to schedule your free site assessment.";
+  const FAIL_MSG = `Sorry, your request didn't go through. Your details are back in the form, so press the button to try again, or reach us at (469) 465 5915 or ${SUPPORT_EMAIL}.`;
+  const DUPLICATE_WINDOW_MS = 2 * 60 * 1000;
+  const recentSends = new Map(); // payload fingerprint -> { pending, sentAt }
+
+  const fieldNames = ["name", "business", "email", "phone", "location_type", "traffic", "message"];
+
+  const restoreForm = (data) => {
+    // Don't overwrite anything the visitor has started typing since
+    const untouched = fieldNames.every((n) => !form.elements[n] || !form.elements[n].value);
+    if (!untouched) return false;
+    fieldNames.forEach((n) => { if (form.elements[n]) form.elements[n].value = data[n] || ""; });
+    return true;
+  };
+
+  const buildPayload = (data) => new URLSearchParams({
+    Name: data.name,
+    Business: data.business,
+    Email: data.email,
+    Phone: data.phone,
+    "Facility type": data.location_type,
+    "Daily foot traffic": data.traffic,
+    Message: data.message || "(none)",
+    _replyto: data.email,                       // "Reply" goes to the visitor
+    _subject: `Machine request: ${data.business}`,
+    _template: "table",
+    _captcha: "false",
+  });
+
+  form.addEventListener("submit", (e) => {
     e.preventDefault();
     setStatus("", "");
 
@@ -134,41 +169,51 @@ document.addEventListener("DOMContentLoaded", () => {
     const data = Object.fromEntries(new FormData(form).entries());
     if (data._gotcha) return; // bot filled the honeypot
 
-    button.disabled = true;
-    label.textContent = "Sending…";
+    const payload = buildPayload(data);
+    const fingerprint = payload.toString();
 
-    try {
-      const res = await fetch(FORM_ENDPOINT, {
-        method: "POST",
-        headers: { "Content-Type": "application/json", Accept: "application/json" },
-        body: JSON.stringify({
-          Name: data.name,
-          Business: data.business,
-          Email: data.email,
-          Phone: data.phone,
-          "Facility type": data.location_type,
-          "Daily foot traffic": data.traffic,
-          Message: data.message || "(none)",
-          _replyto: data.email,                       // "Reply" goes to the visitor
-          _subject: `Machine request: ${data.business}`,
-          _template: "table",
-          _captcha: "false",
-        }),
-      });
-      const result = await res.json().catch(() => ({}));
-      // FormSubmit returns success as the string "true" or "false"
-      if (!res.ok || String(result.success) !== "true") {
-        throw new Error(result.message || "Request failed with status " + res.status);
-      }
-
+    // Safeguard 3: same request already sending, or sent moments ago
+    const previous = recentSends.get(fingerprint);
+    if (previous && (previous.pending || Date.now() - previous.sentAt < DUPLICATE_WINDOW_MS)) {
       form.reset();
-      setStatus("Request received. We'll reach out within 24 business hours to schedule your free site assessment.", "success");
-    } catch (err) {
-      console.error("Contact form:", err);
-      setStatus(`That didn't send. Try again, or reach us at (469) 465 5915 or ${SUPPORT_EMAIL}.`, "error");
-    } finally {
-      button.disabled = false;
-      label.textContent = "Request my free machine";
+      setStatus(SUCCESS_MSG, "success");
+      return;
     }
+    recentSends.set(fingerprint, { pending: true, sentAt: Date.now() });
+
+    // Show success immediately; the send continues in the background
+    form.reset();
+    requiredFields.forEach((f) => {
+      f.closest(".field")?.classList.remove("has-error");
+      f.removeAttribute("aria-invalid");
+    });
+    setStatus(SUCCESS_MSG, "success");
+
+    // Form-encoded body: no CORS preflight round trip, and works with keepalive
+    // in every browser. keepalive caps the body at 64 KB; the message field has
+    // a maxlength, but skip keepalive for anything unusually large.
+    const body = payload.toString();
+    fetch(FORM_ENDPOINT, {
+      method: "POST",
+      headers: { Accept: "application/json" },
+      body: payload,
+      keepalive: body.length < 60000,           // Safeguard 1
+    })
+      .then(async (res) => {
+        const result = await res.json().catch(() => ({}));
+        // FormSubmit returns success as the string "true" or "false"
+        if (!res.ok || String(result.success) !== "true") {
+          throw new Error(result.message || "Request failed with status " + res.status);
+        }
+        recentSends.set(fingerprint, { pending: false, sentAt: Date.now() });
+      })
+      .catch((err) => {
+        // Safeguard 2: tell the visitor and give them their details back
+        console.error("Contact form:", err);
+        recentSends.delete(fingerprint);
+        const restored = restoreForm(data);
+        setStatus(restored ? FAIL_MSG : FAIL_MSG.replace("Your details are back in the form, so press the button to try again", "Please check your details and press the button again"), "error");
+        status.scrollIntoView({ behavior: "smooth", block: "center" });
+      });
   });
 });
