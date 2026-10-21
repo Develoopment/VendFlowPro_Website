@@ -67,6 +67,27 @@ document.addEventListener("DOMContentLoaded", () => {
     ).observe(contact);
   }
 
+  /* ---------- Product video ----------
+     Shows a thumbnail first; the YouTube player (privacy-enhanced,
+     no cookies until played) loads only when the visitor clicks. */
+  document.querySelectorAll(".video-facade").forEach((facade) => {
+    facade.addEventListener("click", () => {
+      const id = facade.dataset.videoId;
+      const iframe = document.createElement("iframe");
+      // Set the referrer policy BEFORE the src so YouTube always learns which
+      // site is embedding it; without that it shows "Error 153".
+      iframe.setAttribute("referrerpolicy", "strict-origin-when-cross-origin");
+      iframe.title = facade.dataset.videoTitle || "YouTube video";
+      iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+      iframe.allowFullscreen = true;
+      const params = new URLSearchParams({ autoplay: "1", rel: "0", playsinline: "1" });
+      if (location.protocol.startsWith("http")) params.set("origin", location.origin);
+      iframe.src = `https://www.youtube-nocookie.com/embed/${id}?${params}`;
+      facade.replaceWith(iframe);
+      iframe.focus();
+    });
+  });
+
   /* ---------- Contact form ---------- */
   const form = document.getElementById("contact-form");
   const status = document.getElementById("form-status");
@@ -147,7 +168,7 @@ document.addEventListener("DOMContentLoaded", () => {
       setStatus(`That didn't send. Try again, or reach us at (469) 465 5915 or ${SUPPORT_EMAIL}.`, "error");
     } finally {
       button.disabled = false;
-      label.textContent = "Request a machine";
+      label.textContent = "Request my free machine";
     }
   });
 });
