@@ -147,7 +147,7 @@ document.addEventListener("DOMContentLoaded", () => {
       setStatus(`That didn't send. Try again, or reach us at (469) 465 5915 or ${SUPPORT_EMAIL}.`, "error");
     } finally {
       button.disabled = false;
-      label.textContent = "Request my free machine";
+      label.textContent = "Request a machine";
     }
   });
 });
